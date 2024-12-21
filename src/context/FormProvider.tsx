@@ -1,6 +1,7 @@
-import React, { createContext, useReducer, useEffect } from "react";
+import React, { useReducer, useEffect } from "react";
 import { FormState, FormAction, FormContextProps } from "@/types/form";
-import { FormService } from "@services/FormService";
+import { FormService } from "@/services/FormService";
+import { FormContext } from "./useFormContext";
 
 const initialState: FormState = {
   formData: {},
@@ -29,7 +30,6 @@ function formReducer(state: FormState, action: FormAction): FormState {
   }
 }
 
-const FormContext = createContext<FormContextProps | undefined>(undefined);
 
 export const FormProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [state, dispatch] = useReducer(formReducer, initialState);
