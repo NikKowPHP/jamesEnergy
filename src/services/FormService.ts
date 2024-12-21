@@ -1,4 +1,5 @@
 import { ApiService } from './api';
+import { MockFormService } from './mockHandlers';
 
 interface FormData {
   [key: string]: string;
@@ -15,7 +16,13 @@ export class FormService extends ApiService {
     INITIAL_DATA: '/form/initial-data',
   };
 
+  private static readonly IS_DEV = import.meta.env.DEV;
+
   static async fetchInitialData(): Promise<Record<string, string>> {
+    if (this.IS_DEV) {
+      return MockFormService.fetchInitialData();
+    }
+
     const response = await this.get<FormData>(this.ENDPOINTS.INITIAL_DATA);
     
     if (response.error) {
@@ -26,6 +33,10 @@ export class FormService extends ApiService {
   }
 
   static async submit(data: Record<string, string>): Promise<void> {
+    if (this.IS_DEV) {
+      return MockFormService.submit(data);
+    }
+
     const response = await this.post<FormResponse>(this.ENDPOINTS.SUBMIT, data);
     
     if (response.error) {
@@ -37,15 +48,23 @@ export class FormService extends ApiService {
     }
   }
 
-  // Optional: Method to validate form data before submission
   static validateFormData(data: Record<string, string>): string | null {
-    // Add any client-side validation logic here
     const requiredFields = ['name', 'email'];
     
     for (const field of requiredFields) {
       if (!data[field]) {
         return `${field} is required`;
       }
+    }
+
+    // Email validation
+    if (data.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
+      return 'Invalid email format';
+    }
+
+    // Phone validation (if provided)
+    if (data.phone && !/^\+?[\d\s-]{10,}$/.test(data.phone)) {
+      return 'Invalid phone number format';
     }
 
     return null;
