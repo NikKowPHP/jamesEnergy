@@ -1,5 +1,5 @@
 import React, { createContext, useReducer, useEffect } from "react";
-import { FormState, FormAction, FormContextProps } from "@types/form";
+import { FormState, FormAction, FormContextProps } from "@/types/form";
 import { FormService } from "@services/FormService";
 
 const initialState: FormState = {
@@ -41,6 +41,7 @@ export const FormProvider: React.FC<{ children: React.ReactNode }> = ({ children
         const initialData = await FormService.fetchInitialData();
         dispatch({ type: "SET_INITIAL_DATA", payload: initialData });
       } catch (error) {
+        console.error("Error fetching initial data:", error);
         dispatch({ type: "SET_ERROR", payload: "Failed to load initial data" });
       } finally {
         dispatch({ type: "SET_LOADING", payload: false });
@@ -50,7 +51,7 @@ export const FormProvider: React.FC<{ children: React.ReactNode }> = ({ children
     fetchInitialData();
   }, []);
 
-  const setField = (field: string, value: any) => {
+  const setField = (field: string, value: string) => {
     dispatch({ type: "SET_FIELD", payload: { field, value } });
   };
 

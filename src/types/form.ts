@@ -1,14 +1,14 @@
 export interface FormState {
-  formData: Record<string, any>;
+  formData: Record<string, string>;
   loading: boolean;
   error: string | null;
 }
 
 export type FormAction =
-  | { type: "SET_FIELD"; payload: { field: string; value: any } }
+  | { type: "SET_FIELD"; payload: { field: string; value: string } }
   | { type: "SET_LOADING"; payload: boolean }
   | { type: "SET_ERROR"; payload: string | null }
-  | { type: "SET_INITIAL_DATA"; payload: Record<string, any> }
+  | { type: "SET_INITIAL_DATA"; payload: Record<string, string> }
   | { type: "RESET_FORM" };
 
 export interface FormField {
@@ -26,7 +26,7 @@ export interface FormField {
 
 export interface FormContextProps {
   state: FormState;
-  setField: (field: string, value: any) => void;
+  setField: (field: string, value: string) => void;
   submitForm: () => Promise<void>;
 }
 
