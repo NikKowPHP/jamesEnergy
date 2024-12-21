@@ -1,0 +1,49 @@
+Core Frameworks and Libraries
+React (with TypeScript):
+
+Component-based UI development.
+TypeScript ensures type safety and reduces runtime errors.
+React's flexibility supports modern design and architecture patterns.
+Vite:
+
+Fast development server and build tool.
+Optimized for modern JavaScript frameworks like React.
+Provides an instant HMR (Hot Module Replacement) experience for efficient development.
+Tailwind CSS:
+
+Utility-first CSS framework for rapid UI development.
+Enables responsive, minimalistic, and consistent styling.
+Provides flexibility to customize design and follow Vercel's aesthetic.
+State Management
+Context API:
+Manages global state across the application.
+Centralizes logic for form handling, API interactions, and caching.
+Ensures clean separation of business logic from presentational components.
+Utilities and Tools
+React.memo:
+
+Optimizes performance by preventing unnecessary re-renders of stateless components.
+Framer Motion:
+
+Adds smooth animations and transitions for interactive elements.
+Enhances user experience by integrating modern visual effects.
+Custom Hooks:
+
+useSessionStorage: For persisting user input data across page reloads.
+useFormContext: For consuming the form's global state.
+Performance Enhancements
+Lazy Loading:
+
+Defers loading of non-critical components/pages like the Thank You page.
+Caching Strategies:
+
+In-memory caching via Context API for short-term optimizations.
+Local storage-based caching for long-term, less volatile data.
+Design and Styling
+Inter Font:
+
+Clean and minimalistic typography for professional-looking UI.
+Tailwind Classes:
+
+Responsive grid layouts.
+Hover effects and transitions for buttons and interactive elements.
