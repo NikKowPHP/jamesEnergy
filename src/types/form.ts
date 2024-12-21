@@ -22,6 +22,7 @@ export interface FormField {
     maxLength?: number;
     message?: string;
   };
+  helperText?: string;
 }
 
 export interface FormContextProps {
