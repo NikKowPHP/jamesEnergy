@@ -4,6 +4,7 @@ import { Input } from './Input';
 import { FormField } from '@/types/form';
 import { formSchema, FormData } from '@/utils/validationSchema';
 import * as yup from 'yup';
+import { useNavigate } from 'react-router-dom';
 
 const US_STATES = [
   { value: 'AL', label: 'Alabama' },
@@ -61,6 +62,7 @@ const formFields: FormField[] = [
 ];
 
 const Form = () => {
+  const navigate = useNavigate();
   const { state, setField, submitForm } = useFormContext();
   const { formData, loading, error } = state;
   const [validationErrors, setValidationErrors] = React.useState<Partial<Record<keyof FormData, string>>>({});
@@ -119,14 +121,11 @@ const Form = () => {
     e.preventDefault();
     
     try {
-      // Validate all fields
       await formSchema.validate(formData, { abortEarly: false });
-      
-      // If validation passes, submit the form
       await submitForm();
+      navigate('/thank-you');
     } catch (err) {
       if (err instanceof yup.ValidationError) {
-        // Transform Yup's validation errors into our format
         const errors = err.inner.reduce((acc, curr) => ({
           ...acc,
           [curr.path!]: curr.message
