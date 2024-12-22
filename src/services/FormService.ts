@@ -18,6 +18,11 @@ export class FormService extends ApiService {
 
   private static readonly IS_DEV = import.meta.env.DEV;
 
+  private static readonly STORAGE_KEY = 'form_data';
+  static get storageKey() {
+    return this.STORAGE_KEY;
+  }
+
   static async fetchInitialData(): Promise<Record<string, string>> {
     if (this.IS_DEV) {
       return MockFormService.fetchInitialData();
@@ -68,5 +73,23 @@ export class FormService extends ApiService {
     }
 
     return null;
+  }
+
+  static loadStoredData(): Record<string, string> {
+    try {
+      const storedData = sessionStorage.getItem(this.STORAGE_KEY);
+      return storedData ? JSON.parse(storedData) : {};
+    } catch (error) {
+      console.error('Error loading from session storage:', error);
+      return {};
+    }
+  }
+
+  static saveData(data: Record<string, string>): void {
+    try {
+      sessionStorage.setItem(this.STORAGE_KEY, JSON.stringify(data));
+    } catch (error) {
+      console.error('Error saving to session storage:', error);
+    }
   }
 } 

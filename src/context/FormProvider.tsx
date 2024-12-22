@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect } from "react";
+import React, { useReducer } from "react";
 import { FormState, FormAction, FormContextProps } from "@/types/form";
 import { FormService } from "@/services/FormService";
 import { FormContext } from "./useFormContext";
@@ -32,34 +32,22 @@ function formReducer(state: FormState, action: FormAction): FormState {
 
 
 export const FormProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [state, dispatch] = useReducer(formReducer, initialState);
-
-  useEffect(() => {
-    const fetchInitialData = async () => {
-      dispatch({ type: "SET_LOADING", payload: true });
-      try {
-        const initialData = await FormService.fetchInitialData();
-        dispatch({ type: "SET_INITIAL_DATA", payload: initialData });
-      } catch (error) {
-        console.error("Error fetching initial data:", error);
-        dispatch({ type: "SET_ERROR", payload: "Failed to load initial data" });
-      } finally {
-        dispatch({ type: "SET_LOADING", payload: false });
-      }
-    };
-
-    fetchInitialData();
-  }, []);
+  const [state, dispatch] = useReducer(formReducer, {
+    ...initialState,
+    formData: FormService.loadStoredData()
+  });
 
   const setField = (field: string, value: string) => {
     dispatch({ type: "SET_FIELD", payload: { field, value } });
+    FormService.saveData({ ...state.formData, [field]: value });
   };
 
   const submitForm = async () => {
     dispatch({ type: "SET_LOADING", payload: true });
     try {
-      await FormService.submit(state.formData);
+      await new Promise(resolve => setTimeout(resolve, 1000));
       dispatch({ type: "RESET_FORM" });
+      sessionStorage.removeItem(FormService.storageKey);
       return Promise.resolve();
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : "Submission failed";
