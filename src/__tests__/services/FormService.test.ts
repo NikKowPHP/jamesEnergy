@@ -43,7 +43,7 @@ describe('FormService', () => {
       FormService.saveData(mockData);
       
       expect(setItemSpy).toHaveBeenCalledWith(
-        'formData',
+        FormService.storageKey,
         JSON.stringify(mockData)
       );
     });
