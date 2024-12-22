@@ -1,28 +1,46 @@
 import * as yup from 'yup';
 
+const US_STATES = [
+  { value: 'AL', label: 'Alabama' },
+  { value: 'AK', label: 'Alaska' },
+  // ... add all US states
+];
+
 export const formSchema = yup.object().shape({
-  name: yup
+  businessName: yup
     .string()
-    .required('Full name is required')
-    .min(2, 'Name must be at least 2 characters'),
+    .required('Business name is required')
+    .min(2, 'Business name must be at least 2 characters'),
   
-  email: yup
+  address: yup
     .string()
-    .required('Email is required')
-    .email('Please enter a valid email address'),
+    .required('Address is required')
+    .min(5, 'Please enter a valid address'),
   
-  phone: yup
+  city: yup
     .string()
-    .matches(
-      /^\+?[\d\s-]{10,}$/,
-      'Please enter a valid phone number'
-    )
+    .required('City is required')
+    .min(2, 'Please enter a valid city name'),
+  
+  state: yup
+    .string()
+    .required('State is required')
+    .oneOf(US_STATES.map(state => state.value), 'Please select a valid state'),
+  
+  currentProvider: yup
+    .string()
     .optional(),
   
-  message: yup
-    .string()
+  contractEndDate: yup
+    .date()
     .optional()
-    .max(500, 'Message must be less than 500 characters'),
+    .min(new Date(), 'Date cannot be in the past'),
+  
+  estimatedMonthlyBill: yup
+    .number()
+    .optional()
+    .positive('Amount must be positive')
+    .transform((value) => (isNaN(value) ? undefined : value))
 });
 
 export type FormData = yup.InferType<typeof formSchema>; 

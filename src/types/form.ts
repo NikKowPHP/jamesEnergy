@@ -14,15 +14,19 @@ export type FormAction =
 export interface FormField {
   id: string;
   label: string;
-  type: "text" | "email" | "tel" | "number";
+  type: "text" | "email" | "tel" | "number" | "date" | "select";
   required?: boolean;
+  options?: { value: string; label: string }[];
   validation?: {
     pattern?: RegExp;
     minLength?: number;
     maxLength?: number;
+    min?: number;
+    max?: number;
     message?: string;
   };
   helperText?: string;
+  placeholder?: string;
 }
 
 export interface FormContextProps {
@@ -39,5 +43,7 @@ export interface InputProps {
   error?: string;
   helperText?: string;
   required?: boolean;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  placeholder?: string;
+  options?: { value: string; label: string }[];
+  onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
 } 
