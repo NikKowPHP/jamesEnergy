@@ -16,7 +16,7 @@ export class FormService extends ApiService {
     INITIAL_DATA: '/form/initial-data',
   };
 
-  private static readonly IS_DEV = import.meta.env.DEV;
+  private static readonly IS_DEV =  process.env.NODE_ENV === 'development';
 
   private static readonly STORAGE_KEY = 'form_data';
   static get storageKey() {
@@ -80,7 +80,9 @@ export class FormService extends ApiService {
       const storedData = sessionStorage.getItem(this.STORAGE_KEY);
       return storedData ? JSON.parse(storedData) : {};
     } catch (error) {
-      console.error('Error loading from session storage:', error);
+      if (this.IS_DEV) {
+        console.error('Error loading form data:', error);
+      }
       return {};
     }
   }
@@ -89,7 +91,9 @@ export class FormService extends ApiService {
     try {
       sessionStorage.setItem(this.STORAGE_KEY, JSON.stringify(data));
     } catch (error) {
-      console.error('Error saving to session storage:', error);
+      if (this.IS_DEV) {
+        console.error('Error saving form data:', error);
+      }
     }
   }
 } 

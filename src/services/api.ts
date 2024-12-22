@@ -12,7 +12,7 @@ interface ApiResponse<T> {
 }
 
 export class ApiService {
-  private static readonly BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
+  private static readonly BASE_URL = process.env.VITE_API_URL || 'http://localhost:3000/api';
   
   private static async fetchWithTimeout<T>(
     endpoint: string, 

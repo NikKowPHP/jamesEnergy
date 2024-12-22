@@ -1,9 +1,17 @@
 import { FormService } from '@/services/FormService';
 
 describe('FormService', () => {
+  const originalEnv = process.env;
+
   beforeEach(() => {
     sessionStorage.clear();
     jest.clearAllMocks();
+    // Setup process.env for tests
+    process.env = { ...originalEnv, NODE_ENV: 'test' };
+  });
+
+  afterEach(() => {
+    process.env = originalEnv;
   });
 
   describe('loadStoredData', () => {
@@ -19,14 +27,23 @@ describe('FormService', () => {
       const result = FormService.loadStoredData();
       expect(result).toEqual(mockData);
     });
+
+    it('should handle JSON parse errors gracefully', () => {
+      jest.spyOn(sessionStorage, 'getItem').mockReturnValue('invalid json');
+      const result = FormService.loadStoredData();
+      expect(result).toEqual({});
+    });
   });
 
   describe('saveData', () => {
     it('should save data to session storage', () => {
       const mockData = { name: 'Test', email: 'test@example.com' };
+      const setItemSpy = jest.spyOn(sessionStorage, 'setItem');
+      
       FormService.saveData(mockData);
-      expect(sessionStorage.setItem).toHaveBeenCalledWith(
-        FormService.storageKey,
+      
+      expect(setItemSpy).toHaveBeenCalledWith(
+        'formData',
         JSON.stringify(mockData)
       );
     });

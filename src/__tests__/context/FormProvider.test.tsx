@@ -1,10 +1,11 @@
+import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { FormProvider } from '@/context/FormProvider';
 import { useFormContext } from '@/context/useFormContext';
 import { FormService } from '@/services/FormService';
 
-// Test component that uses the form context
-const TestComponent = () => {
+// Add proper type for the test component
+const TestComponent: React.FC = () => {
   const { state, setField } = useFormContext();
   return (
     <div>
