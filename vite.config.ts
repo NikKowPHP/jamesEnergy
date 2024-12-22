@@ -19,7 +19,27 @@ export default defineConfig({
   server: {
     host: true,
     watch: {
-      usePolling: true
+      usePolling: true,
+      followSymlinks: true,
+      ignored: ['!**/node_modules/**'],
+    },
+    hmr: {
+      overlay: true,
+      timeout: 5000,
+    },
+    fs: {
+      strict: false,
+      allow: [
+        'node_modules',
+        '..'
+      ]
     }
+  },
+  optimizeDeps: {
+    force: true,
+    entries: [
+      './src/**/*.{ts,tsx}',
+      './node_modules/**/*.{js,mjs}'
+    ]
   }
 })
