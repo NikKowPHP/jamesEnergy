@@ -6,7 +6,7 @@ const US_STATES = [
   // ... add all US states
 ];
 
-export const formSchema = yup.object().shape({
+export const formSchema = yup.object({
   businessName: yup
     .string()
     .required('Business name is required')
@@ -41,6 +41,13 @@ export const formSchema = yup.object().shape({
     .optional()
     .positive('Amount must be positive')
     .transform((value) => (isNaN(value) ? undefined : value))
-});
+}).strict();
+
+// Helper function for validation with consistent options
+export const validateForm = (data: unknown) => 
+  formSchema.validate(data, { 
+    abortEarly: false,
+    stripUnknown: true 
+  });
 
 export type FormData = yup.InferType<typeof formSchema>; 

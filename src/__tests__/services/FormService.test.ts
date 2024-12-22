@@ -94,7 +94,8 @@ describe('Form Validation', () => {
       const invalidData = {};
       
       try {
-        await formSchema.validate(invalidData);
+        await formSchema.validate(invalidData, { abortEarly: false });
+        fail('Validation should have failed');
       } catch (error: any) {
         // Verify that all required field errors are present
         expect(error.errors).toEqual(
