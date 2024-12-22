@@ -128,7 +128,7 @@ describe('Form Validation', () => {
         businessName: 'A',  // too short
         address: '123 Main St',
         city: 'Springfield',
-        state: 'IL'
+        state: 'AL'  // Use a valid state code
       };
 
       await expect(formSchema.validate(invalidData))
@@ -138,7 +138,7 @@ describe('Form Validation', () => {
 
     it('should validate state selection', async () => {
       const invalidData = {
-        businessName: 'Test Business',
+        businessName: 'Test Business',  // Valid business name
         address: '123 Main St',
         city: 'Springfield',
         state: 'XX'  // invalid state
