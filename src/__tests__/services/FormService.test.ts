@@ -157,7 +157,7 @@ describe('Form Validation', () => {
         businessName: 'Test Business',
         address: '123 Main St',
         city: 'Springfield',
-        state: 'IL',
+        state: 'AL',
         contractEndDate: pastDate
       };
 
@@ -171,7 +171,7 @@ describe('Form Validation', () => {
         businessName: 'Test Business',
         address: '123 Main St',
         city: 'Springfield',
-        state: 'IL',
+        state: 'AL',
         estimatedMonthlyBill: -100  // negative amount
       };
 
@@ -185,7 +185,7 @@ describe('Form Validation', () => {
         businessName: 'Test Business',
         address: '123 Main St',
         city: 'Springfield',
-        state: 'IL',
+        state: 'AL',
         currentProvider: 'Current Co',
         contractEndDate: new Date('2025-01-01'),
         estimatedMonthlyBill: 500
