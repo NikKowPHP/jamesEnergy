@@ -22,16 +22,6 @@ const LandingPage = () => {
             priority
             className="h-8 w-auto"
           />
-          <nav className="hidden md:flex space-x-8">
-            {["About", "Services", "Contact"].map((item) => (
-              <button 
-                key={item}
-                className="text-sm text-gray-600 hover:text-black transition-colors"
-              >
-                {item}
-              </button>
-            ))}
-          </nav>
         </div>
       </header>
 
