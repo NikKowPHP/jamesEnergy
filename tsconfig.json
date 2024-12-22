@@ -13,7 +13,8 @@
       "@services/*": ["src/services/*"],
       "@pages/*": ["src/pages/*"],
       "@types/*": ["src/types/*"],
-      "@utils/*": ["src/utils/*"]
+      "@utils/*": ["src/utils/*"],
+      "@assets/*": ["src/assets/*"]
     },
 
     /* Bundler mode */
