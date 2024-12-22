@@ -4,6 +4,62 @@ export interface FormState {
   error: string | null;
 }
 
+
+const US_STATES = [
+  { value: 'AL', label: 'Alabama' },
+  { value: 'AK', label: 'Alaska' },
+  // ... add all US states
+];
+
+export const formFields: FormField[] = [
+  {
+    id: 'businessName',
+    label: 'Business Name',
+    type: 'text',
+    required: true,
+    helperText: 'Enter your registered business name',
+  },
+  {
+    id: 'address',
+    label: 'Address',
+    type: 'text',
+    required: true,
+    helperText: 'Enter your business address',
+  },
+  {
+    id: 'city',
+    label: 'City',
+    type: 'text',
+    required: true,
+  },
+  {
+    id: 'state',
+    label: 'State',
+    type: 'select',
+    required: true,
+    options: US_STATES,
+  },
+  {
+    id: 'currentProvider',
+    label: 'Current Energy Provider',
+    type: 'text',
+    helperText: 'Optional - Your current energy provider',
+  },
+  {
+    id: 'contractEndDate',
+    label: 'Contract End Date',
+    type: 'date',
+    helperText: 'Optional - When does your current contract end?',
+  },
+  {
+    id: 'estimatedMonthlyBill',
+    label: 'Estimated Monthly Bill',
+    type: 'text',
+    helperText: 'Optional - Your average monthly energy bill',
+    placeholder: '$0.00',
+  },
+];
+
 export type FormAction =
   | { type: "SET_FIELD"; payload: { field: string; value: string } }
   | { type: "SET_LOADING"; payload: boolean }
