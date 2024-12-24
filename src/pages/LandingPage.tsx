@@ -123,105 +123,70 @@ const LandingPage = () => {
     <>
       <LandingPageHelmet />
       <AnimatePresence>
-
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
-        className="min-h-screen bg-white"
-      >
-        <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-          {/* Hero Section */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="relative mb-20 rounded-2xl overflow-hidden bg-gradient-to-br from-blue-50 to-cyan-50"
-          >
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div className="relative z-10 p-8 lg:p-12">
-                <motion.h1 
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+          className="min-h-screen bg-white"
+        >
+          <main className="container mx-auto px-4 sm:px-6 lg:px-8 ">
+            <div className="grid lg:grid-cols-2 gap-20">
+              {/* Left side: Info section */}
+              <div className="space-y-12">
+                <motion.div 
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 }}
-                  className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-black mb-6"
+                  className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-blue-50 to-cyan-50 p-8 lg:p-12"
                 >
-                  <span className="bg-gradient-to-r from-blue-500 via-blue-600 to-cyan-500 bg-clip-text text-transparent">
-                    Empowering Texas { ' ' }
-                  </span>
-                   with Smarter, Cleaner Energy Choices!
-                
-                </motion.h1>
-                <p className="text-xl text-gray-600 leading-relaxed max-w-xl mb-8">
-                  Compare rates from 30+ energy suppliers and find the perfect plan for your business in just minutes.
-                </p>
-                <motion.div
-                  animate={{
-                    y: [0, 12, 0],
-                  }}
-                  transition={{
-                    duration: 1.5,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                  className="hidden md:flex justify-center mt-12 mb-4"
-                >
-                  <FiChevronDown className="w-8 h-8 text-blue-500" />
+                  <motion.h1 
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
+                    className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-black mb-6"
+                  >
+                    <span className="bg-gradient-to-r from-blue-500 via-blue-600 to-cyan-500 bg-clip-text text-transparent">
+                      Empowering Texas {' '}
+                    </span>
+                    with Smarter, Cleaner Energy Choices!
+                  </motion.h1>
+                  <p className="text-xl text-gray-600 leading-relaxed max-w-xl mb-8">
+                    Compare rates from 30+ energy suppliers and find the perfect plan for your business in just minutes.
+                  </p>
                 </motion.div>
-                <Image
-                  src={images.hero.src}
-                  alt="Energy Solutions"
-                  width={600}
-                  height={400}
-                  className="lg:hidden w-full rounded-xl shadow-lg"
-                  priority
-                />
+
+                <Steps steps={STEPS_DATA} />
+
+                <div className="pt-8 border-t border-gray-100">
+                  <p className="text-sm font-medium text-gray-500 mb-6">
+                    Trusted by Industry Leaders
+                  </p>
+                  <PartnerLogos />
+                </div>
               </div>
-              <div className="hidden lg:block relative h-full min-h-[500px]">
-                <Image
-                  src={images.hero.src}
-                  alt="Energy Solutions"
-                  className="object-cover object-center rounded-r-2xl"
-                  priority
-                />
-                <div className="absolute inset-0 bg-gradient-to-r from-white/80 to-transparent" />
+
+              {/* Right side: Form section */}
+              <div className="lg:sticky lg:top-8">
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ 
+                    opacity: isFormVisible ? 1 : 0,
+                    y: isFormVisible ? 0 : 20 
+                  }}
+                  transition={{ 
+                    duration: 0.6,
+                    ease: "easeOut"
+                  }}
+                  id="form-section"
+                  className="bg-white p-8 rounded-2xl border border-gray-200 shadow-lg hover:shadow-xl transition-shadow duration-200"
+                >
+                  <h2 className="text-2xl font-bold text-gray-900 mb-8">
+                    Get Your Free Quote
+                  </h2>
+                  <Form />
+                </motion.div>
               </div>
             </div>
-          </motion.div>
-
-          <div className="grid lg:grid-cols-2 gap-20">
-            <div className="space-y-12">
-              <Steps steps={STEPS_DATA} />
-
-              <div className="pt-8 border-t border-gray-100">
-                <p className="text-sm font-medium text-gray-500 mb-6">
-                  Trusted by Industry Leaders
-                </p>
-                <PartnerLogos />
-              </div>
-            </div>
-
-            <div className="lg:sticky lg:top-8">
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ 
-                  opacity: isFormVisible ? 1 : 0,
-                  y: isFormVisible ? 0 : 20 
-                }}
-                transition={{ 
-                  duration: 0.6,
-                  ease: "easeOut"
-                }}
-                id="form-section"
-                className="bg-white p-8 rounded-2xl border border-gray-200 shadow-lg hover:shadow-xl transition-shadow duration-200"
-              >
-                <h2 className="text-2xl font-bold text-gray-900 mb-8">
-                  Get Your Free Quote
-                </h2>
-                <Form />
-              </motion.div>
-            </div>
-          </div>
           </main>
         </motion.div>
       </AnimatePresence>
