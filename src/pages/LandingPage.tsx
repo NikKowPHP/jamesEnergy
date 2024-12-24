@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import Form from "@components/form/Form";
 import Image from "@components/common/Image";
 import heroImage from "@/assets/images/hero.webp";
-import logoImage from "@/assets/images/logo.webp";
 const LandingPage = () => {
   return (
     <motion.div
@@ -12,29 +11,18 @@ const LandingPage = () => {
       transition={{ duration: 0.4, ease: "easeOut" }}
       className="min-h-screen bg-[#FAFAFA]"
     >
-      <header className="sticky top-0 z-10 backdrop-blur-sm bg-white/70 border-b border-gray-100">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <Image 
-            src={logoImage} 
-            alt="Company Logo" 
-            width={120} 
-            height={40} 
-            priority
-            className="h-8 w-auto"
-          />
-        </div>
-      </header>
+     
 
       <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div className="space-y-8">
             <div className="space-y-6">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-black">
-                Find The Best Commercial{' '}
+              Empowering Texas with Smarter, Cleaner{' '}
                 <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
-                  Energy Rates
+                  Energy Choices!
                 </span>{' '}
-                in Texas
+              
               </h1>
               <p className="text-lg text-gray-600 leading-relaxed max-w-2xl">
                 Integrity Energy works with over 30 suppliers to provide businesses with the best rates for commercial electricity and gas.
