@@ -1,5 +1,4 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { FiChevronDown } from 'react-icons/fi';
 import { LandingPageHelmet } from '@components/helmets/LandingPageHelmet';
 import { lazy, memo, useEffect, useState } from "react";
 import Image from "@/components/common/Image";
@@ -84,6 +83,7 @@ const STEPS_DATA = [
   { step: "3", text: "Choose your perfect plan" }
 ];
 
+
 const LandingPage = () => {
 
   const [isFormVisible, setIsFormVisible] = useState(false);
@@ -139,6 +139,23 @@ const LandingPage = () => {
                   animate={{ opacity: 1, y: 0 }}
                   className="relative"
                 >
+                  {/* Hero image */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1 }}
+                    className="mb-8"
+                  >
+                    <Image
+                      src={images.hero.src}
+                      alt="Hero illustration"
+                      width={images.hero.width}
+                      height={images.hero.height}
+                      className="w-full max-w-[600px] h-auto object-cover rounded-lg"
+                      priority
+                    />
+                  </motion.div>
+
                   <motion.h1 
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
