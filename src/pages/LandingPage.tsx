@@ -128,10 +128,10 @@ const LandingPage = () => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
-          className="h-screen bg-white overflow-hidden"
+          className="min-h-screen bg-white"
         >
-          <main className="container mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center">
-            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 h-full">
+          <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
               {/* Left side: Info section */}
               <div className="flex flex-col  space-y-6">
                 <motion.div 
@@ -180,7 +180,7 @@ const LandingPage = () => {
               </div>
 
               {/* Right side: Form section */}
-              <div className="flex ">
+              <div className="lg:sticky lg:top-8">
                 <motion.div 
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ 
@@ -192,7 +192,7 @@ const LandingPage = () => {
                     ease: "easeOut"
                   }}
                   id="form-section"
-                  className="bg-white p-6 rounded-2xl border border-gray-200 shadow-lg hover:shadow-xl transition-shadow duration-200 w-full"
+                  className="bg-white p-6 rounded-2xl border border-gray-200 shadow-lg hover:shadow-xl transition-shadow duration-200"
                 >
                   <h2 className="text-xl font-bold text-gray-900 mb-6">
                     Get Your Free Quote
