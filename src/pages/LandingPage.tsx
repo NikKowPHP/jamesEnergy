@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { LandingPageHelmet } from '@components/helmets/LandingPageHelmet';
-import { lazy, memo, useEffect, useState } from "react";
+import { lazy, memo, useEffect, useState, Suspense } from "react";
 import Image from "@/components/common/Image";
 
 // Lazy load non-critical components
@@ -197,7 +197,15 @@ const LandingPage = () => {
                   <h2 className="text-xl font-bold text-gray-900 mb-6">
                     Get Your Free Quote
                   </h2>
-                  <Form />
+                  <Suspense fallback={
+                    <div className="animate-pulse space-y-4">
+                      <div className="h-10 bg-gray-200 rounded w-full"></div>
+                      <div className="h-10 bg-gray-200 rounded w-full"></div>
+                      <div className="h-10 bg-gray-200 rounded w-3/4"></div>
+                    </div>
+                  }>
+                    <Form />
+                  </Suspense>
                 </motion.div>
               </div>
             </div>
