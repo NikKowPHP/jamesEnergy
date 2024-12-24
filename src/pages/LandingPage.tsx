@@ -40,34 +40,37 @@ PartnerLogos.displayName = 'PartnerLogos';
 
 // Memoize steps component
 const Steps = memo(({ steps }: { steps: Array<{ step: string; text: string }> }) => (
-  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
     {steps.map(({ step, text }, index) => (
       <motion.div 
         key={step}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 * index }}
-        className="group p-6 bg-gray-50 rounded-xl hover:bg-gray-100 transition-all duration-200"
+        className="group relative flex flex-col items-center p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300"
       >
-        {/* Mobile layout */}
-        <div className="flex md:hidden items-center space-x-4">
-          <span className="flex items-center justify-center w-10 h-10 text-sm font-semibold text-blue-600 bg-blue-100 rounded-full">
+        {/* Background accent */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+        {/* Step number with animated border */}
+        <div className="relative mb-4">
+          <div className="absolute inset-0 bg-blue-100 rounded-full transform scale-0 group-hover:scale-125 transition-transform duration-300 opacity-50" />
+          <span className="relative flex items-center justify-center w-14 h-14 text-xl font-bold text-blue-600 bg-blue-50 rounded-full border-2 border-blue-100 group-hover:border-blue-200 transition-colors duration-300">
             {step}
-          </span>
-          <span className="font-medium text-gray-900">
-            {text}
           </span>
         </div>
 
-        {/* Desktop layout */}
-        <div className="hidden md:flex flex-col items-center text-center space-y-4">
-          <span className="flex items-center justify-center w-16 h-16 text-2xl font-bold text-blue-600 bg-blue-100 rounded-full transition-transform group-hover:scale-110 duration-200">
-            {step}
-          </span>
-          <span className="font-medium text-gray-900">
-            {text}
-          </span>
-        </div>
+        {/* Step text with hover effect */}
+        <span className="relative text-center font-medium text-gray-800 group-hover:text-blue-600 transition-colors duration-300">
+          {text}
+        </span>
+
+        {/* Connector line (hidden on mobile) */}
+        {index < steps.length - 1 && (
+          <div className="hidden md:block absolute top-1/2 -right-3 w-6 h-[2px] bg-gray-200 transform -translate-y-1/2">
+            <div className="absolute right-0 w-2 h-2 bg-gray-200 rounded-full transform -translate-y-1/2 translate-x-1/2" />
+          </div>
+        )}
       </motion.div>
     ))}
   </div>
@@ -78,9 +81,9 @@ Steps.displayName = 'Steps';
 
 // Add steps data (you can move this to a separate constants file if preferred)
 const STEPS_DATA = [
-  { step: "1", text: "Enter your business details" },
-  { step: "2", text: "Compare energy rates" },
-  { step: "3", text: "Choose your perfect plan" }
+  { step: "1", text: "Share Your Details" },
+  { step: "2", text: "Compare Rates" },
+  { step: "3", text: "Choose & Save" }
 ];
 
 
