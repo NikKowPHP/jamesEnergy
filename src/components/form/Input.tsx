@@ -48,6 +48,7 @@ export const Input: React.FC<InputProps> = ({
             value={value}
             onChange={onChange}
             required={required}
+            placeholder={helperText}
             min={new Date().toISOString().split('T')[0]}
             className={`
               w-full px-3 py-2 rounded-md border
@@ -68,7 +69,7 @@ export const Input: React.FC<InputProps> = ({
             value={value}
             onChange={onChange}
             required={required}
-            placeholder={placeholder}
+            placeholder={helperText}
             className={`
               w-full px-3 py-2 rounded-md border
               focus:outline-none focus:ring-2 focus:ring-offset-2
@@ -86,7 +87,7 @@ export const Input: React.FC<InputProps> = ({
     <div className="mb-4">
       <label 
         htmlFor={id} 
-        className="block text-sm font-medium text-gray-700 mb-1"
+        className="block text-sm font-medium text-gray-700 mb-1 text-start"
       >
         {label}
         {required && <span className="text-red-500 ml-1">*</span>}
@@ -94,11 +95,11 @@ export const Input: React.FC<InputProps> = ({
       
       {renderInput()}
       
-      {helperText && (
+      {/* {helperText && (
         <p className="mt-1 text-sm text-gray-500">
           {helperText}
         </p>
-      )}
+      )} */}
       
       {error && (
         <p className="mt-1 text-sm text-red-500">

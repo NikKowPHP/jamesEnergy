@@ -128,12 +128,12 @@ const LandingPage = () => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
-          className="min-h-screen bg-white"
+          className="h-screen bg-white overflow-hidden"
         >
-          <main className="container mx-auto px-4 sm:px-6 lg:px-8 ">
-            <div className="grid lg:grid-cols-2 gap-20">
+          <main className="container mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center">
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 h-full">
               {/* Left side: Info section */}
-              <div className="space-y-12">
+              <div className="flex flex-col  space-y-6">
                 <motion.div 
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -144,14 +144,14 @@ const LandingPage = () => {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1 }}
-                    className="mb-8"
+                    className="mb-6"
                   >
                     <Image
                       src={images.hero.src}
                       alt="Hero illustration"
                       width={images.hero.width}
                       height={images.hero.height}
-                      className="w-full max-w-[600px] h-auto object-cover rounded-lg"
+                      className="w-full h-[280px] object-cover rounded-lg"
                       priority
                     />
                   </motion.div>
@@ -160,19 +160,19 @@ const LandingPage = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2 }}
-                    className="text-3xl md:text-4xl font-bold text-gray-900 max-w-xl leading-tight mb-4"
+                    className="text-2xl md:text-3xl font-bold text-gray-900 max-w-xl leading-tight mb-3"
                   >
                     Find The Best Commercial Energy Rates in Texas
                   </motion.h1>
-                  <p className="text-lg text-gray-600 leading-relaxed max-w-xl mb-8">
-                    Integrity Energy works with over 30+ suppliers to provide businesses with the best rates for commercial energy. We analyze your usage patterns and match them with the right supplier and energy plan to help you get a great price.
+                  <p className="text-base text-gray-600 leading-relaxed max-w-xl mb-6">
+                    Integrity Energy works with over 30+ suppliers to provide businesses with the best rates for commercial energy.
                   </p>
                 </motion.div>
 
                 <Steps steps={STEPS_DATA} />
 
-                <div className="pt-8 border-t border-gray-100">
-                  <p className="text-sm font-medium text-gray-500 mb-6">
+                <div className="pt-4 border-t border-gray-100">
+                  <p className="text-sm font-medium text-gray-500 mb-4">
                     Trusted by Industry Leaders
                   </p>
                   <PartnerLogos />
@@ -180,7 +180,7 @@ const LandingPage = () => {
               </div>
 
               {/* Right side: Form section */}
-              <div className="lg:sticky lg:top-8">
+              <div className="flex ">
                 <motion.div 
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ 
@@ -192,9 +192,9 @@ const LandingPage = () => {
                     ease: "easeOut"
                   }}
                   id="form-section"
-                  className="bg-white p-8 rounded-2xl border border-gray-200 shadow-lg hover:shadow-xl transition-shadow duration-200"
+                  className="bg-white p-6 rounded-2xl border border-gray-200 shadow-lg hover:shadow-xl transition-shadow duration-200 w-full"
                 >
-                  <h2 className="text-2xl font-bold text-gray-900 mb-8">
+                  <h2 className="text-xl font-bold text-gray-900 mb-6">
                     Get Your Free Quote
                   </h2>
                   <Form />
