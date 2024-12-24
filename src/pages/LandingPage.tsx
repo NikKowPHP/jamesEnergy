@@ -88,8 +88,17 @@ const LandingPage = () => {
                   transition={{ delay: 0.1 * index }}
                   className="group p-6 bg-gray-50 dark:bg-gray-900 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200"
                 >
-                  <div className="flex items-center space-x-4">
+                  <div className="flex md:hidden items-center space-x-4">
                     <span className="flex items-center justify-center w-10 h-10 text-sm font-semibold text-blue-600 bg-blue-100 dark:bg-blue-900 dark:text-blue-400 rounded-full">
+                      {step}
+                    </span>
+                    <span className="font-medium text-gray-900 dark:text-gray-100">
+                      {text}
+                    </span>
+                  </div>
+
+                  <div className="hidden md:flex flex-col items-center text-center space-y-4">
+                    <span className="flex items-center justify-center w-16 h-16 text-2xl font-bold text-blue-600 bg-blue-100 dark:bg-blue-900 dark:text-blue-400 rounded-full transition-transform group-hover:scale-110 duration-200">
                       {step}
                     </span>
                     <span className="font-medium text-gray-900 dark:text-gray-100">
