@@ -137,21 +137,18 @@ const LandingPage = () => {
                 <motion.div 
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-blue-50 to-cyan-50 p-8 lg:p-12"
+                  className="relative"
                 >
                   <motion.h1 
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2 }}
-                    className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-black mb-6"
+                    className="text-3xl md:text-4xl font-bold text-gray-900 max-w-xl leading-tight mb-4"
                   >
-                    <span className="bg-gradient-to-r from-blue-500 via-blue-600 to-cyan-500 bg-clip-text text-transparent">
-                      Empowering Texas {' '}
-                    </span>
-                    with Smarter, Cleaner Energy Choices!
+                    Find The Best Commercial Energy Rates in Texas
                   </motion.h1>
-                  <p className="text-xl text-gray-600 leading-relaxed max-w-xl mb-8">
-                    Compare rates from 30+ energy suppliers and find the perfect plan for your business in just minutes.
+                  <p className="text-lg text-gray-600 leading-relaxed max-w-xl mb-8">
+                    Integrity Energy works with over 30+ suppliers to provide businesses with the best rates for commercial energy. We analyze your usage patterns and match them with the right supplier and energy plan to help you get a great price.
                   </p>
                 </motion.div>
 
