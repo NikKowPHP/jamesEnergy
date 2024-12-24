@@ -1,16 +1,64 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <title>React + TypeScript + Tailwind</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    
+    <!-- Primary Meta Tags -->
+    <title>SmartGrid Energy | Smart Energy Solutions for Texas Business</title>
+    <meta name="title" content="SmartGrid Energy | Smart Energy Solutions for Texas Business" />
+    <meta name="description" content="Compare rates from 30+ energy suppliers and find the perfect energy plan for your Texas business. Get your free quote in just 15 minutes!" />
+    <meta name="keywords" content="texas energy, business energy, energy suppliers, commercial electricity, energy rates, texas utilities" />
+      
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://smartgridenergy.info/" />
+    <meta property="og:title" content="SmartGrid Energy | Smart Grid Energy Solutions" />
+    <meta property="og:description" content="Compare rates from 30+ energy suppliers and find the perfect energy plan for your Texas business. Get your free quote in just 15 minutes!" />
+    <meta property="og:image" content="/og-image.jpg" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://smartgridenergy.com/" />
+    <meta property="twitter:title" content="SmartGrid Energy | Smart Energy Solutions for Texas Business" />
+    <meta property="twitter:description" content="Compare rates from 30+ energy suppliers and find the perfect energy plan for your Texas business." />
+    <meta property="twitter:image" content="/og-image.jpg" />
+    
+    <!-- Fonts Preload -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link 
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" 
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
+    />
+    
+    <!-- Preload Critical Assets -->
+    <link rel="preload" href="/src/main.tsx" as="script" type="module" />
+    <link rel="preload" href="/hero.webp" as="image" />
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
+    
+    <!-- Additional Meta Tags -->
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="SmartGrid Energy" />
+    <link rel="canonical" href="https://smartgridenergy.com/" />
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    
+    <!-- Preconnect to API domain -->
+    <link rel="preconnect" href="https://api.smartgridenergy.com" />
   </body>
 </html>
