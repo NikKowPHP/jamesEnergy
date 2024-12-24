@@ -1,4 +1,4 @@
-import { AnimatePresence, motion, steps } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { FiChevronDown } from 'react-icons/fi';
 import { LandingPageHelmet } from '@components/helmets/LandingPageHelmet';
 import { lazy, memo, useEffect, useState } from "react";
@@ -80,15 +80,26 @@ const LoadingFallback = () => (
   <div className="animate-pulse bg-gray-200 dark:bg-gray-800 rounded-xl h-96" />
 );
 
+// Add steps data (you can move this to a separate constants file if preferred)
+const STEPS_DATA = [
+  { step: "1", text: "Enter your business details" },
+  { step: "2", text: "Compare energy rates" },
+  { step: "3", text: "Choose your perfect plan" }
+];
 
 const LandingPage = () => {
 
   const [isFormVisible, setIsFormVisible] = useState(false);
-  useEffect(() => {
-    const img = new Image();
-    img.src = images.hero.src;
-  }, []);
 
+  // Fix: Replace new Image() constructor with proper image preloading
+  useEffect(() => {
+    const preloadImage = (src: string) => {
+      const img = document.createElement('img');
+      img.src = src;
+    };
+    
+    preloadImage(images.hero.src);
+  }, []);
 
   // Intersection Observer for form
   useEffect(() => {
@@ -183,34 +194,28 @@ const LandingPage = () => {
 
           <div className="grid lg:grid-cols-2 gap-20">
             <div className="space-y-12">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <Steps steps={} />
-              </div>
+              <Steps steps={STEPS_DATA} />
 
               <div className="pt-8 border-t border-gray-100 dark:border-gray-800">
                 <p className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-6">
                   Trusted by Industry Leaders
                 </p>
-                <div className="flex flex-wrap items-center gap-12 justify-center">
-                  {[partner1, partner2, partner3].map((partner, index) => (
-                    <Image
-                      key={index}
-                      src={partner}
-                      alt={`Partner ${index + 1}`}
-                      width={120}
-                      height={48}
-                      className="h-8 w-auto opacity-75 hover:opacity-100 transition-opacity duration-200"
-                    />
-                  ))}
-                </div>
+                <PartnerLogos />
               </div>
             </div>
 
             <div className="lg:sticky lg:top-8">
               <motion.div 
                 initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
+                animate={{ 
+                  opacity: isFormVisible ? 1 : 0,
+                  y: isFormVisible ? 0 : 20 
+                }}
+                transition={{ 
+                  duration: 0.6,
+                  ease: "easeOut"
+                }}
+                id="form-section"
                 className="bg-white dark:bg-gray-900 p-8 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-lg hover:shadow-xl transition-shadow duration-200"
               >
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-8">
