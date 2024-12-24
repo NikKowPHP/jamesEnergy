@@ -14,6 +14,15 @@ export const Input: React.FC<InputProps> = ({
   onChange
 }) => {
   const renderInput = () => {
+    const baseClasses = `
+      w-full px-3 py-2 rounded-md border
+      focus:outline-none focus:ring-2 focus:ring-offset-2
+      ${error 
+        ? 'border-red-500 focus:ring-red-500' 
+        : 'border-gray-300 focus:ring-indigo-500'
+      }
+    `;
+
     switch (type) {
       case 'select':
         return (
@@ -22,14 +31,7 @@ export const Input: React.FC<InputProps> = ({
             value={value}
             onChange={onChange as React.ChangeEventHandler<HTMLSelectElement>}
             required={required}
-            className={`
-              w-full px-3 py-2 rounded-md border
-              focus:outline-none focus:ring-2 focus:ring-offset-2
-              ${error 
-                ? 'border-red-500 focus:ring-red-500' 
-                : 'border-gray-300 focus:ring-indigo-500'
-              }
-            `}
+            className={baseClasses}
           >
             <option value="">Select a state...</option>
             {options?.map(option => (
@@ -48,16 +50,9 @@ export const Input: React.FC<InputProps> = ({
             value={value}
             onChange={onChange}
             required={required}
-            placeholder={helperText}
+            placeholder={placeholder}
             min={new Date().toISOString().split('T')[0]}
-            className={`
-              w-full px-3 py-2 rounded-md border
-              focus:outline-none focus:ring-2 focus:ring-offset-2
-              ${error 
-                ? 'border-red-500 focus:ring-red-500' 
-                : 'border-gray-300 focus:ring-indigo-500'
-              }
-            `}
+            className={baseClasses}
           />
         );
       
@@ -69,22 +64,15 @@ export const Input: React.FC<InputProps> = ({
             value={value}
             onChange={onChange}
             required={required}
-            placeholder={helperText}
-            className={`
-              w-full px-3 py-2 rounded-md border
-              focus:outline-none focus:ring-2 focus:ring-offset-2
-              ${error 
-                ? 'border-red-500 focus:ring-red-500' 
-                : 'border-gray-300 focus:ring-indigo-500'
-              }
-            `}
+            placeholder={placeholder}
+            className={baseClasses}
           />
         );
     }
   };
 
   return (
-    <div className="mb-4">
+    <div className="mb-4 group relative">
       <label 
         htmlFor={id} 
         className="block text-sm font-medium text-gray-700 mb-1 text-start"
@@ -95,11 +83,17 @@ export const Input: React.FC<InputProps> = ({
       
       {renderInput()}
       
-      {/* {helperText && (
-        <p className="mt-1 text-sm text-gray-500">
-          {helperText}
-        </p>
-      )} */}
+      {/* Helper text tooltip */}
+      {helperText && (
+        <div className="absolute left-0 -bottom-1 transform translate-y-full opacity-0 
+                      group-hover:opacity-100 transition-opacity duration-200 z-10">
+          <div className="bg-gray-900 text-white text-xs rounded py-1 px-2 max-w-xs">
+            {helperText}
+            {/* Tooltip arrow */}
+            <div className="absolute -top-1 left-4 w-2 h-2 bg-gray-900 transform rotate-45" />
+          </div>
+        </div>
+      )}
       
       {error && (
         <p className="mt-1 text-sm text-red-500">

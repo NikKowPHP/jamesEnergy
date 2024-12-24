@@ -93,17 +93,63 @@ const Form = () => {
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="space-y-4">
-          {formFields.map((field) => (
-            <Input
-              key={field.id}
-              {...field}
-              value={field.id === 'estimatedMonthlyBill' && formData[field.id] 
-                ? formatCurrency(formData[field.id]) 
-                : formData[field.id] || ''}
-              error={validationErrors[field.id as keyof FormData]}
-              onChange={(e) => handleChange(field.id as keyof FormData, e.target.value)}
-            />
+          {/* Business Name and Address fields */}
+          {formFields
+            .filter(field => ['businessName', 'address'].includes(field.id))
+            .map((field) => (
+              <Input
+                key={field.id}
+                {...field}
+                value={formData[field.id] || ''}
+                error={validationErrors[field.id as keyof FormData]}
+                onChange={(e) => handleChange(field.id as keyof FormData, e.target.value)}
+              />
           ))}
+
+          {/* City and State group */}
+          <div className="grid grid-cols-2 gap-4">
+            {formFields
+              .filter(field => ['city', 'state'].includes(field.id))
+              .map((field) => (
+                <Input
+                  key={field.id}
+                  {...field}
+                  value={formData[field.id] || ''}
+                  error={validationErrors[field.id as keyof FormData]}
+                  onChange={(e) => handleChange(field.id as keyof FormData, e.target.value)}
+                />
+            ))}
+          </div>
+
+          {/* Contract End Date */}
+          {formFields
+            .filter(field => ['contractEndDate'].includes(field.id))
+            .map((field) => (
+              <Input
+                key={field.id}
+                {...field}
+                value={formData[field.id] || ''}
+                error={validationErrors[field.id as keyof FormData]}
+                onChange={(e) => handleChange(field.id as keyof FormData, e.target.value)}
+              />
+          ))}
+
+          {/* Provider and Monthly Bill group */}
+          <div className="grid grid-cols-2 gap-4">
+            {formFields
+              .filter(field => ['currentProvider', 'estimatedMonthlyBill'].includes(field.id))
+              .map((field) => (
+                <Input
+                  key={field.id}
+                  {...field}
+                  value={field.id === 'estimatedMonthlyBill' && formData[field.id] 
+                    ? formatCurrency(formData[field.id]) 
+                    : formData[field.id] || ''}
+                  error={validationErrors[field.id as keyof FormData]}
+                  onChange={(e) => handleChange(field.id as keyof FormData, e.target.value)}
+                />
+            ))}
+          </div>
 
           <button
             type="submit"
