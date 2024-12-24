@@ -18,6 +18,7 @@ export default defineConfig({
   },
   server: {
     host: true,
+    port: 3005,
     watch: {
       usePolling: true,
       followSymlinks: true,
