@@ -5,6 +5,7 @@ import heroImage from "@/assets/images/hero.webp";
 import partner1 from "@/assets/images/partner/partner1.png";
 import partner2 from "@/assets/images/partner/partner2.png";
 import partner3 from "@/assets/images/partner/partner3.png";
+import { FiChevronDown } from 'react-icons/fi';
 
 const LandingPage = () => {
   return (
@@ -38,6 +39,19 @@ const LandingPage = () => {
               <p className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed max-w-xl mb-8">
                 Compare rates from 30+ energy suppliers and find the perfect plan for your business in just minutes.
               </p>
+              <motion.div
+                animate={{
+                  y: [0, 12, 0],
+                }}
+                transition={{
+                  duration: 1.5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                className="hidden md:flex justify-center mt-12 mb-4"
+              >
+                <FiChevronDown className="w-8 h-8 text-blue-500 dark:text-blue-400" />
+              </motion.div>
               <Image
                 src={heroImage}
                 alt="Energy Solutions"
@@ -90,7 +104,7 @@ const LandingPage = () => {
               <p className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-6">
                 Trusted by Industry Leaders
               </p>
-              <div className="flex flex-wrap items-center gap-12">
+              <div className="flex flex-wrap items-center gap-12 justify-center">
                 {[partner1, partner2, partner3].map((partner, index) => (
                   <Image
                     key={index}
