@@ -165,7 +165,7 @@ const LandingPage = () => {
                     transition={{ delay: 0.2 }}
                     className="text-2xl md:text-3xl font-bold text-gray-900 max-w-xl leading-tight mb-3"
                   >
-                    Find The Best Commercial Energy Rates in Texas
+                    Empowering Texas with Smarter, Cleaner Energy Choices!
                   </motion.h1>
                   <p className="text-base text-gray-600 leading-relaxed max-w-xl mb-6">
                     Integrity Energy works with over 30+ suppliers to provide businesses with the best rates for commercial energy.
