@@ -79,13 +79,13 @@ const Form = () => {
     if (field === 'address') {
       searchAddresses(value);
     }
-    // Handle special formatting for currency
-    if (field === 'estimatedMonthlyBill') {
-      // Store the raw numeric value but display formatted
+    // Handle special formatting for currency display only
+    else if (field === 'estimatedMonthlyBill') {
+      // Keep the raw value in form data
       processedValue = value.replace(/[^0-9.]/g, '');
-      const formattedValue = formatCurrency(processedValue);
       
-      // Update the input display with formatted value
+      // Format only for display
+      const formattedValue = formatCurrency(processedValue);
       const input = document.getElementById('estimatedMonthlyBill') as HTMLInputElement;
       if (input) {
         input.value = formattedValue;
@@ -124,7 +124,7 @@ const Form = () => {
       )}
 
       <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
-        <div className="space-y-3 sm:space-y-4">
+        <div >
           {/* Business Name */}
           {formFields
             .filter(field => ['businessName'].includes(field.id))
@@ -154,7 +154,7 @@ const Form = () => {
           </div>
 
           {/* Address Section */}
-          <div className="space-y-3">
+          <div>
             {/* Address Autocomplete */}
             {formFields
               .filter(field => ['address'].includes(field.id))
@@ -168,7 +168,7 @@ const Form = () => {
                     onChange={(e) => handleChange(field.id as keyof FormData, e.target.value)}
                   />
                   {addressSuggestions.length > 0 && (
-                    <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg">
+                    <div className="absolute z-50 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg">
                       {addressSuggestions.map((suggestion, index) => (
                         <div
                           key={index}

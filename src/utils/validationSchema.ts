@@ -29,15 +29,21 @@ export const formSchema = yup.object({
     .optional(),
   
   contractEndDate: yup
-    .date()
+    .string()
     .optional()
-    .min(new Date(), 'Date cannot be in the past'),
+    .test('future-date', 'Date cannot be in the past', value => {
+      if (!value) return true;
+      return new Date(value) > new Date();
+    }),
   
   estimatedMonthlyBill: yup
-    .number()
+    .string()
     .optional()
-    .positive('Amount must be positive')
-    .transform((value) => (isNaN(value) ? undefined : value))
+    .test('positive-number', 'Amount must be positive', value => {
+      if (!value) return true;
+      const num = parseFloat(value);
+      return !isNaN(num) && num > 0;
+    })
 }).strict();
 
 // Helper function for validation with consistent options
