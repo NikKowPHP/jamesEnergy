@@ -30,10 +30,13 @@ const Form = () => {
       }, 300),
     []
   );
-  const handleAddressSelect = (suggestion: { address: string; city: string; state: string; zip: string }) => {
+  const handleAddressSelect = async (suggestion: { address: string; city: string; state: string; zip: string }) => {
     setField('address', suggestion.address);
     setField('city', suggestion.city);
     setField('state', suggestion.state);
+    await validateField('address', suggestion.address);
+    await validateField('city', suggestion.city);
+    await validateField('state', suggestion.state);
     setAddressSuggestions([]); // Clear suggestions after selection
   };
 
