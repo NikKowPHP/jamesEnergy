@@ -10,7 +10,9 @@
     "preview": "vite preview",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "docker:dev:proxy": "docker compose -f docker-compose.proxy.yml up",
+    "docker:dev:proxy:rebuild": "docker compose -f docker-compose.proxy.yml up --build"
   },
   "dependencies": {
     "@types/node": "^22.10.2",
