@@ -23,7 +23,7 @@ export const formFields: FormField[] = [
   {
     id: 'address',
     label: 'Address',
-    type: 'text',
+    type: 'autocomplete',
     required: true,
     placeholder: 'Enter your business address',
     helperText: 'Enter the address where your business is located',
@@ -78,7 +78,7 @@ export type FormAction =
 export interface FormField {
   id: string;
   label: string;
-  type: "text" | "email" | "tel" | "number" | "date" | "select";
+  type: "text" | "email" | "tel" | "number" | "date" | "select" | "autocomplete";
   required?: boolean;
   options?: { value: string; label: string }[];
   validation?: {
