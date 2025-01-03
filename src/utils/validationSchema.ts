@@ -1,10 +1,7 @@
+import { US_STATES } from '@/types/form';
 import * as yup from 'yup';
 
-const US_STATES = [
-  { value: 'AL', label: 'Alabama' },
-  { value: 'AK', label: 'Alaska' },
-  // ... add all US states
-];
+
 
 export const formSchema = yup.object({
   businessName: yup
