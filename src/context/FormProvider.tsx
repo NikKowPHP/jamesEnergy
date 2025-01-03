@@ -44,13 +44,22 @@ export const FormProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const submitForm = async () => {
     dispatch({ type: "SET_LOADING", payload: true });
+    dispatch({ type: "SET_ERROR", payload: null });
+
     try {
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Submit the form data
+      await FormService.submit(state.formData);
+      
+      // Clear form data on success
       dispatch({ type: "RESET_FORM" });
       sessionStorage.removeItem(FormService.storageKey);
+      
       return Promise.resolve();
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : "Submission failed";
+      const errorMessage = error instanceof Error 
+        ? error.message 
+        : "An unexpected error occurred while submitting the form";
+      
       dispatch({ type: "SET_ERROR", payload: errorMessage });
       return Promise.reject(error);
     } finally {

@@ -12,7 +12,7 @@ interface FormResponse {
 
 export class FormService extends ApiService {
   private static readonly ENDPOINTS = {
-    SUBMIT: '/form/submit',
+    SUBMIT: '/customer/submit',
     INITIAL_DATA: '/form/initial-data',
     ADDRESS_SEARCH: '/ercot-master/search',
   };
@@ -56,11 +56,22 @@ export class FormService extends ApiService {
   }
 
   static async submit(data: Record<string, string>): Promise<void> {
-    if (this.IS_DEV) {
-      return MockFormService.submit(data);
-    }
+  
+      const payload = {
+        phone: data.phone,
+        email: data.email,
+        company_name: data.businessName,
+        address_street: data.address,
+        address_city: data.city,
+        address_state: data.state,
+        address_zip: data.zip,
+        contract_end_date: data.contractEndDate,
+        energy_provider: data.currentProvider,
+        monthly_bill: parseFloat(data.estimatedMonthlyBill.replace(/[^0-9.]/g, '')),
+      };
+    
 
-    const response = await this.post<FormResponse>(this.ENDPOINTS.SUBMIT, data);
+    const response = await this.post<FormResponse>(this.ENDPOINTS.SUBMIT, payload);
     
     if (response.error) {
       throw new Error(response.error);
@@ -69,6 +80,7 @@ export class FormService extends ApiService {
     if (!response.data?.success) {
       throw new Error(response.data?.message || 'Submission failed');
     }
+  
   }
 
   static validateFormData(data: Record<string, string>): string | null {
