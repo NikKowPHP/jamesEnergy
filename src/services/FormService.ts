@@ -14,6 +14,7 @@ export class FormService extends ApiService {
   private static readonly ENDPOINTS = {
     SUBMIT: '/form/submit',
     INITIAL_DATA: '/form/initial-data',
+    ADDRESS_SEARCH: '/ercot-master/search',
   };
 
   private static readonly IS_DEV =  process.env.NODE_ENV === 'development';
@@ -21,6 +22,23 @@ export class FormService extends ApiService {
   private static readonly STORAGE_KEY = 'form_data';
   static get storageKey() {
     return this.STORAGE_KEY;
+  }
+
+  static async searchAddresses(query: string): Promise<Array<{
+    address: string;
+    city: string;
+    state: string;
+    zip: string;
+  }>> {
+    if (!query || query.length < 3) return [];
+
+    try {
+      const response = await this.get<any>(`${this.ENDPOINTS.ADDRESS_SEARCH}?search=${encodeURIComponent(query)}`);
+      return response.data || [];
+    } catch (error) {
+      console.error('Error searching addresses:', error);
+      return [];
+    }
   }
 
   static async fetchInitialData(): Promise<Record<string, string>> {
