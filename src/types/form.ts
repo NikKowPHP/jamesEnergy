@@ -67,6 +67,30 @@ export const formFields: FormField[] = [
     helperText: 'Enter the name of your registered business',
   },
   {
+    id: 'email',
+    label: 'Email Address',
+    type: 'email',
+    required: true,
+    placeholder: 'Enter your email address',
+    helperText: 'We\'ll send your quote to this email',
+    validation: {
+      pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+      message: 'Please enter a valid email address',
+    },
+  },
+  {
+    id: 'phone',
+    label: 'Phone Number',
+    type: 'tel',
+    required: true,
+    placeholder: '(555) 555-5555',
+    helperText: 'Enter your business phone number',
+    validation: {
+      pattern: /^\+?[\d\s-()]{10,}$/,
+      message: 'Please enter a valid phone number',
+    },
+  },
+  {
     id: 'address',
     label: 'Address',
     type: 'autocomplete',

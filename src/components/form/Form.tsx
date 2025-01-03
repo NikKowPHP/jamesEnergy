@@ -34,10 +34,11 @@ const Form = () => {
     setField('address', suggestion.address);
     setField('city', suggestion.city);
     setField('state', suggestion.state);
+    setField('zip', suggestion.zip);
     await validateField('address', suggestion.address);
     await validateField('city', suggestion.city);
     await validateField('state', suggestion.state);
-    setAddressSuggestions([]); // Clear suggestions after selection
+    setAddressSuggestions([]);
   };
 
  
@@ -124,56 +125,23 @@ const Form = () => {
 
       <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
         <div className="space-y-3 sm:space-y-4">
-          {/* Business Name and Address fields */}
-          <div className="space-y-3">
-            {formFields
-              .filter(field => ['businessName', 'address'].includes(field.id))
-              .map((field) => {
-                if (field.type === 'autocomplete' && field.id === 'address') {
-                  return (
-                    <div key={field.id} className="relative">
-                      <Input
-                        {...field}
-                        type="text"
-                        value={formData[field.id] || ''}
-                        error={validationErrors[field.id as keyof FormData]}
-                        onChange={(e) => handleChange(field.id as keyof FormData, e.target.value)}
-                      />
-                      {addressSuggestions.length > 0 && (
-                        <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg">
-                          {addressSuggestions.map((suggestion, index) => (
-                            <div
-                              key={index}
-                              className="px-4 py-2 cursor-pointer hover:bg-gray-100"
-                              onClick={() => handleAddressSelect(suggestion)}
-                            >
-                              <div className="font-medium">{suggestion.address}</div>
-                              <div className="text-sm text-gray-600">
-                                {suggestion.city}, {suggestion.state} {suggestion.zip}
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  );
-                }
-                return (
-                  <Input
-                    key={field.id}
-                    {...field}
-                    value={formData[field.id] || ''}
-                    error={validationErrors[field.id as keyof FormData]}
-                    onChange={(e) => handleChange(field.id as keyof FormData, e.target.value)}
-                  />
-                );
-              })}
-          </div>
+          {/* Business Name */}
+          {formFields
+            .filter(field => ['businessName'].includes(field.id))
+            .map((field) => (
+              <Input
+                key={field.id}
+                {...field}
+                value={formData[field.id] || ''}
+                error={validationErrors[field.id as keyof FormData]}
+                onChange={(e) => handleChange(field.id as keyof FormData, e.target.value)}
+              />
+            ))}
 
-          {/* City and State group */}
+          {/* Email and Phone in two columns */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             {formFields
-              .filter(field => ['city', 'state'].includes(field.id))
+              .filter(field => ['email', 'phone'].includes(field.id))
               .map((field) => (
                 <Input
                   key={field.id}
@@ -182,7 +150,56 @@ const Form = () => {
                   error={validationErrors[field.id as keyof FormData]}
                   onChange={(e) => handleChange(field.id as keyof FormData, e.target.value)}
                 />
-            ))}
+              ))}
+          </div>
+
+          {/* Address Section */}
+          <div className="space-y-3">
+            {/* Address Autocomplete */}
+            {formFields
+              .filter(field => ['address'].includes(field.id))
+              .map((field) => (
+                <div key={field.id} className="relative">
+                  <Input
+                    {...field}
+                    type="text"
+                    value={formData[field.id] || ''}
+                    error={validationErrors[field.id as keyof FormData]}
+                    onChange={(e) => handleChange(field.id as keyof FormData, e.target.value)}
+                  />
+                  {addressSuggestions.length > 0 && (
+                    <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg">
+                      {addressSuggestions.map((suggestion, index) => (
+                        <div
+                          key={index}
+                          className="px-4 py-2 cursor-pointer hover:bg-gray-100"
+                          onClick={() => handleAddressSelect(suggestion)}
+                        >
+                          <div className="font-medium">{suggestion.address}</div>
+                          <div className="text-sm text-gray-600">
+                            {suggestion.city}, {suggestion.state} {suggestion.zip}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+
+            {/* City and State */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+              {formFields
+                .filter(field => ['city', 'state'].includes(field.id))
+                .map((field) => (
+                  <Input
+                    key={field.id}
+                    {...field}
+                    value={formData[field.id] || ''}
+                    error={validationErrors[field.id as keyof FormData]}
+                    onChange={(e) => handleChange(field.id as keyof FormData, e.target.value)}
+                  />
+              ))}
+            </div>
           </div>
 
           {/* Contract End Date */}
